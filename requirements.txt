@@ -1,0 +1,6 @@
+WTForms==2.2.1
+youtube-dl==2019.7.2
+python-magic==0.4.15
+python-magic-bin==0.4.14
+Flask==1.0.2
+eyeD3==0.8.10
