@@ -36,24 +36,28 @@ def processURL():
 
         if form.validate():
             # Save the comment here.
-            if(os.path.exists(str(os.getcwd())+'/public/{}'.format(cv.getfilename()))):
+            
+            if(os.path.exists(cv.getfilename())):
                 return render_template('ytdl.html', form=form,file=cv.getfilename())
             
             
             else:
                 flash('Converting video! Please wait...')
                 file=cv.downloadVideo()
+                if("Error" in file):
+                    flash("Error in Youtube URL")
+                    return render_template('ytdl.html', form=form)
                 # print(file)
-                if(cv.statusCheck):
-                    flash("Video done!")
-                    changetags(file,form)
-            if("Error" in file):
-                flash("Error in Youtube URL")
-                return render_template('ytdl.html', form=form)
+                else:
+                    if(cv.statusCheck):
+                        flash("Video done!")
+                        changetags(file,form)
+                        return render_template('ytdl.html', form=form,file=file)
+            
             
         else:
             flash('Error in form input.')
-        return render_template('ytdl.html', form=form,file=file)
+        
  
     return render_template('ytdl.html', form=form)
 @app.route("/downloads/<file>")
