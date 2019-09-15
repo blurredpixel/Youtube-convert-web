@@ -16,7 +16,7 @@ class ReusableForm(Form):
     album = TextField('Track Album:')
  
 def changetags(file,form):
-    audiofile = eyed3.load(file)
+    audiofile = eyed3.load(str(os.getcwd())+'/public/'+file)
     audiofile.tag.artist = str(form.artist.data)
     audiofile.tag.album = str(form.album.data)
     audiofile.tag.album_artist = str(form.artist.data)
@@ -43,7 +43,7 @@ def processURL():
             else:
                 flash('Converting video! Please wait...')
                 file=cv.downloadVideo()
-                print(file)
+                # print(file)
                 if(cv.statusCheck):
                     flash("Video done!")
                     changetags(file,form)

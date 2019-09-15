@@ -35,5 +35,5 @@ class convertVideo():
                 return "Error: Download link invalid"
            
             # ydl.prepare_filename(self.title)
-            return str(os.getcwd())+'/public/{}-{}.mp3'.format(self.title,self.artist)
+            return '{}-{}.mp3'.format(self.title,self.artist)
     
