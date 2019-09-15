@@ -16,7 +16,7 @@ class ReusableForm(Form):
     album = TextField('Track Album:')
  
 def changetags(file,form):
-    audiofile = eyed3.load(str(os.getcwd())+'/public/{}'.format(file))
+    audiofile = eyed3.load(file)
     audiofile.tag.artist = str(form.artist.data)
     audiofile.tag.album = str(form.album.data)
     audiofile.tag.album_artist = str(form.artist.data)
