@@ -3,18 +3,22 @@ import os
 
 class convertVideo():
 
-    def __init__(self,url,title):
+    def __init__(self,url,title,artist):
         self.url=url
         self.title=title
+        self.artist=str(artist).replace(" ","")
         #eturn super().__init__(*args, **kwargs)
 
     def statusCheck(self,d):
         return d['status']=='finished'
-
+    def getfilename(self):
+        
+            
+        return str(os.getcwd())+'/public/{}-{}.mp3'.format(self.title,self.artist)
     def downloadVideo(self):
         ydl_opts = {
             'format': 'bestaudio/best',
-            'outtmpl': str(os.getcwd())+'/public/{}.%(ext)s'.format(self.title),
+            'outtmpl': str(os.getcwd())+'/public/{}-{}.%(ext)s'.format(self.title,self.artist),
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
@@ -31,5 +35,5 @@ class convertVideo():
                 return "Error: Download link invalid"
            
             # ydl.prepare_filename(self.title)
-            return self.title+".mp3"
+            return str(os.getcwd())+'/public/{}-{}.mp3'.format(self.title,self.artist)
     

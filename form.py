@@ -29,20 +29,21 @@ def processURL():
     # print (form.errors)
     if request.method == 'POST':
         
-        cv=convertVideo(form.videourl.data,form.title.data)
+        cv=convertVideo(form.videourl.data,form.title.data,form.artist.data)
         
         
         
 
         if form.validate():
             # Save the comment here.
-            if(os.path.isfile(str(os.getcwd())+'/public/{}'.format(str(form.title.data)+".mp3"))):
-                return render_template('ytdl.html', form=form,file=str(form.title.data)+".mp3")
+            if(os.path.isfile(str(os.getcwd())+'/public/{}'.format(cv.getfilename()))):
+                return render_template('ytdl.html', form=form,file=cv.getfilename())
             
             
             else:
                 flash('Converting video! Please wait...')
                 file=cv.downloadVideo()
+                print(file)
                 if(cv.statusCheck):
                     flash("Video done!")
                     changetags(file,form)
