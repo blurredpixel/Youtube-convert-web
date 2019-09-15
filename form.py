@@ -37,7 +37,7 @@ def processURL():
         if form.validate():
             # Save the comment here.
             
-            if(os.path.exists(cv.getfilename())):
+            if(os.path.exists(cv.getfilepath())):
                 return render_template('ytdl.html', form=form,file=cv.getfilename())
             
             
