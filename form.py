@@ -3,7 +3,7 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 from convert import convertVideo 
 import eyed3
 # App config.
-DEBUG = True
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
@@ -49,4 +49,4 @@ def processURL():
 def sendfiletouser(file):
     return send_file('C:\\Users\\dj\\Dropbox\\Python\\ytdl-web\\public\\{}'.format(file))
 if __name__ == "__main__":
-    app.run(port='5002', host="0.0.0.0")
+    app.run(port='6969', host="0.0.0.0")
