@@ -26,9 +26,9 @@ def changetags(file,form):
 def processURL():
     form = ReusableForm(request.form)
     
-    print (form.errors)
+    # print (form.errors)
     if request.method == 'POST':
-        flash('Converting video! Please wait...')
+        
         cv=convertVideo(form.videourl.data,form.title.data)
         
         
@@ -36,15 +36,20 @@ def processURL():
 
         if form.validate():
             # Save the comment here.
+            if(os.path.isfile(str(os.getcwd())+'/public/{}'.format(str(form.title.data)+".mp3"))):
+                return render_template('ytdl.html', form=form,file=str(form.title.data)+".mp3")
             
-            file=cv.downloadVideo()
-            if("Error" in file):
-                flash("Error in Youtube URL")
-                return render_template('ytdl.html', form=form)
+            
             else:
+                flash('Converting video! Please wait...')
+                file=cv.downloadVideo()
                 if(cv.statusCheck):
                     flash("Video done!")
                     changetags(file,form)
+            if("Error" in file):
+                flash("Error in Youtube URL")
+                return render_template('ytdl.html', form=form)
+            
         else:
             flash('Error in form input.')
         return render_template('ytdl.html', form=form,file=file)
