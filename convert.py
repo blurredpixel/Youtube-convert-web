@@ -12,8 +12,7 @@ class convertVideo():
     def statusCheck(self,d):
         return d['status']=='finished'
     def getfilename(self):
-        
-            
+           
         return str(os.getcwd())+'/public/{}-{}.mp3'.format(self.title,self.artist)
     def downloadVideo(self):
         ydl_opts = {
