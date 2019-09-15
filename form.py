@@ -11,9 +11,9 @@ app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 app.config['UPLOAD_FOLDER']="public"
 class ReusableForm(Form):
     videourl = TextField('Video URL:', validators=[validators.required()])
-    title = TextField('Track Title:',validators=[validators.required()])
-    artist = TextField('Track Artist:',validators=[validators.required()])
-    album = TextField('Track Album:',validators=[validators.required()])
+    title = TextField('Track Title:')
+    artist = TextField('Track Artist:')
+    album = TextField('Track Album:')
  
 def changetags(file,form):
     audiofile = eyed3.load(str(os.getcwd())+'/public/{}'.format(file))
@@ -38,9 +38,13 @@ def processURL():
             # Save the comment here.
             
             file=cv.downloadVideo()
-            if(cv.statusCheck):
-                flash("Video done!")
-                changetags(file,form)
+            if("Error" in file):
+                flash("Error in Youtube URL")
+                return render_template('ytdl.html', form=form)
+            else:
+                if(cv.statusCheck):
+                    flash("Video done!")
+                    changetags(file,form)
         else:
             flash('Error in form input.')
         return render_template('ytdl.html', form=form,file=file)

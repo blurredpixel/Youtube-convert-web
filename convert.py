@@ -25,8 +25,10 @@ class convertVideo():
         }
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            
-            ydl.download([self.url])
+            try:
+                ydl.download([self.url])
+            except:
+                return "Error: Download link invalid"
            
             # ydl.prepare_filename(self.title)
             return self.title+".mp3"
