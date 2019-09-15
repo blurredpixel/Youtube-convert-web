@@ -14,7 +14,7 @@ class convertVideo():
     def downloadVideo(self):
         ydl_opts = {
             'format': 'bestaudio/best',
-            'outtmpl': 'C:\\Users\\dj\\Dropbox\\Python\\ytdl-web\\public\\{}.%(ext)s'.format(self.title),
+            'outtmpl': '. /public/{}.%(ext)s'.format(self.title),
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',

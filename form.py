@@ -15,7 +15,7 @@ class ReusableForm(Form):
     album = TextField('Track Album:',validators=[validators.required()])
  
 def changetags(file,form):
-    audiofile = eyed3.load('C:\\Users\\dj\\Dropbox\\Python\\ytdl-web\\public\\{}'.format(file))
+    audiofile = eyed3.load('. /public/{}'.format(file))
     audiofile.tag.artist = str(form.artist.data)
     audiofile.tag.album = str(form.album.data)
     audiofile.tag.album_artist = str(form.artist.data)
@@ -47,6 +47,6 @@ def processURL():
     return render_template('ytdl.html', form=form)
 @app.route("/downloads/<file>")
 def sendfiletouser(file):
-    return send_file('C:\\Users\\dj\\Dropbox\\Python\\ytdl-web\\public\\{}'.format(file))
+    return send_file('. /public/{}'.format(file))
 if __name__ == "__main__":
     app.run(port='6969', host="0.0.0.0")
