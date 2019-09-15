@@ -15,7 +15,7 @@ EXPOSE 6969
 
 #install python stuff
 RUN apt-get update
-RUN apt-get install -y python3 python3-dev python3-pip git curl build-essential
+RUN apt-get install -y python3 python3-dev python3-pip git curl build-essential ffmpeg
 
 #clone git repo for app
 RUN git clone https://github.com/blurredpixel/Youtube-convert-web.git
