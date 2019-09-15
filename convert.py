@@ -1,5 +1,5 @@
 import youtube_dl
-
+import os
 
 class convertVideo():
 
@@ -14,7 +14,7 @@ class convertVideo():
     def downloadVideo(self):
         ydl_opts = {
             'format': 'bestaudio/best',
-            'outtmpl': '. /public/{}.%(ext)s'.format(self.title),
+            'outtmpl': str(os.getcwd())+'/public/{}.%(ext)s'.format(self.title),
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',

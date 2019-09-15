@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, request,send_file
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from convert import convertVideo 
 import eyed3
+import os
 # App config.
 
 app = Flask(__name__)
@@ -15,7 +16,7 @@ class ReusableForm(Form):
     album = TextField('Track Album:',validators=[validators.required()])
  
 def changetags(file,form):
-    audiofile = eyed3.load('. /public/{}'.format(file))
+    audiofile = eyed3.load(str(os.getcwd())+'/public/{}'.format(file))
     audiofile.tag.artist = str(form.artist.data)
     audiofile.tag.album = str(form.album.data)
     audiofile.tag.album_artist = str(form.artist.data)
@@ -47,6 +48,6 @@ def processURL():
     return render_template('ytdl.html', form=form)
 @app.route("/downloads/<file>")
 def sendfiletouser(file):
-    return send_file('. /public/{}'.format(file))
+    return send_file(str(os.getcwd())+'/public/{}'.format(file),as_attachment=True)
 if __name__ == "__main__":
     app.run(port='6969', host="0.0.0.0")
