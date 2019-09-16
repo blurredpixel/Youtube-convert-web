@@ -26,7 +26,7 @@ class convertVideo():
                 'preferredquality': '192',
                 
             }],'postprocessor_args': [
-            '-t', '4'
+            '-threads', '4'
             ],
             'prefer_ffmpeg': True,
         
