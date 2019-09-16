@@ -24,7 +24,11 @@ class convertVideo():
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
-            }],
+                
+            }],'postprocessor_args': [
+            '-ar', '16000'
+            ],
+            'prefer_ffmpeg': True,
         
             'progress_hooks': [self.statusCheck],
         }
