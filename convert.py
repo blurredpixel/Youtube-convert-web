@@ -1,35 +1,39 @@
 import youtube_dl
 import os
 
+
 class convertVideo():
 
-    def __init__(self,url,title,artist):
-        self.url=url
-        self.title=title
-        self.artist=str(artist).replace(" ","")
-        #eturn super().__init__(*args, **kwargs)
+    def __init__(self, url, title, artist):
+        self.url = url
+        self.title = title
+        self.artist = str(artist).replace(" ", "")
+        # eturn super().__init__(*args, **kwargs)
 
-    def statusCheck(self,d):
-        return d['status']=='finished'
+    def statusCheck(self, d):
+        return d['status'] == 'finished'
+
     def getfilename(self):
-        return '{}-{}.mp3'.format(self.title,self.artist)
+        return '{}-{}.mp3'.format(self.title, self.artist)
+
     def getfilepath(self):
-           
-        return str(os.getcwd())+'/public/{}-{}.mp3'.format(self.title,self.artist)
+
+        return str(os.getcwd())+'/public/{}-{}.mp3'.format(self.title, self.artist)
+
     def downloadVideo(self):
         ydl_opts = {
             'format': 'bestaudio/best',
-            'outtmpl': str(os.getcwd())+'/public/{}-{}.%(ext)s'.format(self.title,self.artist),
+            'outtmpl': str(os.getcwd())+'/public/{}-{}.%(ext)s'.format(self.title, self.artist),
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
                 'preferredquality': '320',
-                
-            }],'postprocessor_args': [
-            '-threads', '4'
+
+            }], 'postprocessor_args': [
+                '-threads', '4'
             ],
             'prefer_ffmpeg': True,
-        
+
             'progress_hooks': [self.statusCheck],
         }
 
@@ -38,7 +42,6 @@ class convertVideo():
                 ydl.download([self.url])
             except:
                 return "Error: Download link invalid"
-           
+
             # ydl.prepare_filename(self.title)
-            return '{}-{}.mp3'.format(self.title,self.artist)
-    
+            return '{}-{}.mp3'.format(self.title, self.artist)
