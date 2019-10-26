@@ -64,6 +64,7 @@ def processURL():
 
 @app.route("/downloads/<file>")
 def sendfiletouser(file):
+    print(str(os.getcwd())+'/public/{}'.format(file))
     return send_file(str(os.getcwd())+'/public/{}'.format(file), as_attachment=True)
 
 
